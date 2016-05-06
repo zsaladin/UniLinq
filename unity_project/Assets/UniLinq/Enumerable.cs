@@ -144,113 +144,95 @@ namespace UniLinq
 
 		#region Average
 
-		public static double Average (this IEnumerable<int> source)
+		public static double Average(this IEnumerable<int> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			long total = 0;
 			int count = 0;
-			foreach (var element in source) {
-				total = checked (total + element);
+			foreach (var element in source)
+			{
+				total = checked(total + element);
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / (double)count;
 		}
 
-		public static double Average (this IEnumerable<long> source)
+		public static double Average(this IEnumerable<long> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			long total = 0;
 			long count = 0;
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				total += element;
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / (double)count;
 		}
 
-		public static double Average (this IEnumerable<double> source)
+		public static double Average(this IEnumerable<double> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			double total = 0;
 			long count = 0;
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				total += element;
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / count;
 		}
 
-		public static float Average (this IEnumerable<float> source)
+		public static float Average(this IEnumerable<float> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			float total = 0;
 			long count = 0;
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				total += element;
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / count;
 		}
 
-		public static decimal Average (this IEnumerable<decimal> source)
+		public static decimal Average(this IEnumerable<decimal> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			decimal total = 0;
 			long count = 0;
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				total += element;
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / count;
 		}
 
-		static TResult? AverageNullable<TElement, TAggregate, TResult> (this IEnumerable<TElement?> source,
-			Func<TAggregate, TElement, TAggregate> func, Func<TAggregate, long, TResult> result)
-			where TElement : struct
-			where TAggregate : struct
-			where TResult : struct
+		public static double? Average(this IEnumerable<int?> source)
 		{
-			Check.Source (source);
-
-			var total = default (TAggregate);
-			long counter = 0;
-			foreach (var element in source) {
-				if (!element.HasValue)
-					continue;
-
-				total = func (total, element.Value);
-				counter++;
-			}
-
-			if (counter == 0)
-				return null;
-
-			return new TResult? (result (total, counter));
-		}
-
-		public static double? Average (this IEnumerable<int?> source)
-		{
-			Check.Source (source);
+			Check.Source(source);
 
 			long total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				if (!element.HasValue)
 					continue;
 
@@ -261,39 +243,40 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double)counter);
+			return new double?(total / (double)counter);
 		}
 
-		public static double? Average (this IEnumerable<long?> source)
+		public static double? Average(this IEnumerable<long?> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			long total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				if (!element.HasValue)
 					continue;
 
-				total = checked (total + element.Value);
+				total = checked(total + element.Value);
 				counter++;
 			}
 
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double)counter);
-
+			return new double?(total / (double)counter);
 		}
 
-		public static double? Average (this IEnumerable<double?> source)
+		public static double? Average(this IEnumerable<double?> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			double total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				if (!element.HasValue)
 					continue;
 
@@ -304,18 +287,18 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / counter);
-
+			return new double?(total / counter);
 		}
 
-		public static decimal? Average (this IEnumerable<decimal?> source)
+		public static decimal? Average(this IEnumerable<decimal?> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			decimal total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				if (!element.HasValue)
 					continue;
 
@@ -326,18 +309,18 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new decimal? (total / counter);
-
+			return new decimal?(total / counter);
 		}
 
-		public static float? Average (this IEnumerable<float?> source)
+		public static float? Average(this IEnumerable<float?> source)
 		{
-			Check.Source (source);
+			Check.Source(source);
 
 			float total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
+			foreach (var element in source)
+			{
 				if (!element.HasValue)
 					continue;
 
@@ -348,34 +331,35 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new float? (total / counter);
-
+			return new float?(total / counter);
 		}
 
-		public static double Average<TSource> (this IEnumerable<TSource> source, Func<TSource, int> selector)
+		public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			long total = 0;
 			long count = 0;
-			foreach (var element in source) {
-				total += selector (element);
+			foreach (var element in source)
+			{
+				total += selector(element);
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / (double)count;
 		}
 
-		public static double? Average<TSource> (this IEnumerable<TSource> source, Func<TSource, int?> selector)
+		public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			long total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
-				var value = selector (element);
+			foreach (var element in source)
+			{
+				var value = selector(element);
 				if (!value.HasValue)
 					continue;
 
@@ -386,72 +370,74 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double)counter);
+			return new double?(total / (double)counter);
 		}
 
-		public static double Average<TSource> (this IEnumerable<TSource> source, Func<TSource, long> selector)
+		public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			long total = 0;
 			long count = 0;
-			foreach (var element in source) {
-				total = checked (total + selector (element));
+			foreach (var element in source)
+			{
+				total = checked(total + selector(element));
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / (double)count;
-
 		}
 
-		public static double? Average<TSource> (this IEnumerable<TSource> source, Func<TSource, long?> selector)
+		public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			long total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
-				var value = selector (element);
+			foreach (var element in source)
+			{
+				var value = selector(element);
 				if (!value.HasValue)
 					continue;
 
-				total = checked (total + value.Value);
+				total = checked(total + value.Value);
 				counter++;
 			}
 
 			if (counter == 0)
 				return null;
 
-			return new double? (total / (double)counter);
+			return new double?(total / (double)counter);
 		}
 
-		public static double Average<TSource> (this IEnumerable<TSource> source, Func<TSource, double> selector)
+		public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			double total = 0;
 			long count = 0;
-			foreach (var element in source) {
-				total += selector (element);
+			foreach (var element in source)
+			{
+				total += selector(element);
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / count;
-
 		}
 
-		public static double? Average<TSource> (this IEnumerable<TSource> source, Func<TSource, double?> selector)
+		public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			double total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
-				var value = selector (element);
+			foreach (var element in source)
+			{
+				var value = selector(element);
 				if (!value.HasValue)
 					continue;
 
@@ -462,34 +448,35 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new double? (total / counter);
-
+			return new double?(total / counter);
 		}
 
-		public static float Average<TSource> (this IEnumerable<TSource> source, Func<TSource, float> selector)
+		public static float Average<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			float total = 0;
 			long count = 0;
-			foreach (var element in source) {
-				total += selector (element);
+			foreach (var element in source)
+			{
+				total += selector(element);
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / count;
 		}
 
-		public static float? Average<TSource> (this IEnumerable<TSource> source, Func<TSource, float?> selector)
+		public static float? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			float total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
-				var value = selector (element);
+			foreach (var element in source)
+			{
+				var value = selector(element);
 				if (!value.HasValue)
 					continue;
 
@@ -500,33 +487,35 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new float? (total / counter);
+			return new float?(total / counter);
 		}
 
-		public static decimal Average<TSource> (this IEnumerable<TSource> source, Func<TSource, decimal> selector)
+		public static decimal Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			decimal total = 0;
 			long count = 0;
-			foreach (var element in source) {
-				total += selector (element);
+			foreach (var element in source)
+			{
+				total += selector(element);
 				count++;
 			}
 			if (count == 0)
-				throw EmptySequence ();
+				throw new InvalidOperationException();
 			return total / count;
 		}
 
-		public static decimal? Average<TSource> (this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
+		public static decimal? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
 		{
-			Check.SourceAndSelector (source, selector);
+			Check.SourceAndSelector(source, selector);
 
 			decimal total = 0;
 			long counter = 0;
 
-			foreach (var element in source) {
-				var value = selector (element);
+			foreach (var element in source)
+			{
+				var value = selector(element);
 				if (!value.HasValue)
 					continue;
 
@@ -537,7 +526,7 @@ namespace UniLinq
 			if (counter == 0)
 				return null;
 
-			return new decimal? (total / counter);
+			return new decimal?(total / counter);
 		}
 
 		#endregion
